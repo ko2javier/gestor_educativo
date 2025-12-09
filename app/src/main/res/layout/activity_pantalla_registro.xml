@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".PantallaRegistro">
+    <TextView
+        android:id="@+id/Registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        />
+    <EditText
+        android:id="@+id/Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:hint="Nombre"
+        />
+    <EditText
+        android:id="@+id/apellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellidos"
+        />
+    <EditText
+        android:id="@+id/Correo"
+        android:hint="Introduce el correo electrónico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <EditText
+        android:id="@+id/contraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Contraseña"
+        />
+    <EditText
+        android:id="@+id/repiteContraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Repite Contraseña"
+        />
+    <EditText
+        android:id="@+id/nacimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha nacimiento"
+        android:inputType="date"
+        />
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="Confirmar Condiciones "
+        />
+    <RadioGroup
+        android:id="@+id/tipouser"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+             <RadioButton
+                android:id="@+id/Profesor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesor"
+                />
+            <RadioButton
+                android:id="@+id/alumno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alumno"
+                />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/Registrarte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#C72020"
+        android:text="registrarte"
+        />
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="135dp"
+        android:background="#C72020"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        />
+</LinearLayout>

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "635181903812",
+    "firebase_url": "https://gestoreducativo-a2d44-default-rtdb.firebaseio.com",
+    "project_id": "gestoreducativo-a2d44",
+    "storage_bucket": "gestoreducativo-a2d44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635181903812:android:31ce7d7e4a85ebf89cbe91",
+        "android_client_info": {
+          "package_name": "com.example.gestoreducativo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl7plldLGlccxgQNgDLZrxL79PLcA-mYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
