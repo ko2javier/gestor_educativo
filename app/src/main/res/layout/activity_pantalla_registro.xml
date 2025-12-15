@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:padding="30dp"
     tools:context=".PantallaRegistro">
     <TextView
         android:id="@+id/Registro"
@@ -20,39 +21,39 @@
         android:layout_marginTop="40dp"
         />
     <EditText
-        android:id="@+id/Nombre"
+        android:id="@+id/edx_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          android:hint="Nombre"
         />
     <EditText
-        android:id="@+id/apellido"
+        android:id="@+id/edx_apellidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Apellidos"
         />
     <EditText
-        android:id="@+id/Correo"
+        android:id="@+id/edx_email"
         android:hint="Introduce el correo electrónico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     <EditText
-        android:id="@+id/contraseña"
+        android:id="@+id/edx_pss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Contraseña"
         />
     <EditText
-        android:id="@+id/repiteContraseña"
+        android:id="@+id/edx_rep_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Repite Contraseña"
         />
     <EditText
-        android:id="@+id/nacimiento"
+        android:id="@+id/edx_birth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Fecha nacimiento"
@@ -66,19 +67,19 @@
         android:text="Confirmar Condiciones "
         />
     <RadioGroup
-        android:id="@+id/tipouser"
+        android:id="@+id/rg_tipouser"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:orientation="horizontal"
         >
              <RadioButton
-                android:id="@+id/Profesor"
+                android:id="@+id/rb_profesor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profesor"
                 />
             <RadioButton
-                android:id="@+id/alumno"
+                android:id="@+id/rb_alumno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="alumno"
@@ -87,7 +88,7 @@
 
 
     <Button
-        android:id="@+id/Registrarte"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#C72020"

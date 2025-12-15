@@ -10,7 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <activity
+            android:name=".EditarModuloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Crear_Modulo"
+            android:exported="false" />
         <activity
             android:name=".ElementoListaModulo"
             android:exported="false" />

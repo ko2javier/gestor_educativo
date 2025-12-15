@@ -1,64 +1,120 @@
 package com.example.gestoreducativo;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
+import android.widget.RadioButton;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PantallaRegistro extends AppCompatActivity {
+
+    private EditText edxNombre, edxApellidos, edxEmail, edxPass, edxRepPass, edxBirth;
+    private RadioButton rbProfesor, rbAlumno;
+    private CheckBox checkCondiciones;
+    private Button btnRegister, btnCancelar;
+
+    private DatabaseReference dbUsers;
+    private View rootView; // vista raíz para Snackbar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent cancelar=new Intent(this,PantallaInicio.class);
-        Intent AccederRegistro=new Intent(this,MenuPrincipal.class);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pantalla_registro);
 
-        UsuariosSQliteHelper baseDatos=new UsuariosSQliteHelper(this,"Usuarios",null,1);
-        SQLiteDatabase db=baseDatos.getReadableDatabase();
-        //db.execSQL();
+        // Vista raíz (para Snackbar)
+        rootView = findViewById(android.R.id.content);
 
-        TextView pantallaRegistro=findViewById(R.id.Registro);
-        Button Cancelar=findViewById(R.id.cancelar);
-        //Button Registrarse=findViewById(R.id.Registrarte);
-        EditText BienvenidaUser=findViewById(R.id.Nombre);
-        Button Registrar=findViewById(R.id.Registrarte);
-        Bundle RecogidaDatos=new Bundle();
-        Registrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // XML
+        edxNombre = findViewById(R.id.edx_nombre);
+        edxApellidos = findViewById(R.id.edx_apellidos);
+        edxEmail = findViewById(R.id.edx_email);
+        edxPass = findViewById(R.id.edx_pss);
+        edxRepPass = findViewById(R.id.edx_rep_pass);
+        edxBirth = findViewById(R.id.edx_birth);
 
-                RecogidaDatos.putString("NombreUsuario", String.valueOf(BienvenidaUser.getText()));
-                AccederRegistro.putExtra("Rdatos" ,RecogidaDatos);
-                startActivity(AccederRegistro);
-            }
-        });
+        rbProfesor = findViewById(R.id.rb_profesor);
+        rbAlumno = findViewById(R.id.rb_alumno);
+        checkCondiciones = findViewById(R.id.check);
+
+        btnRegister = findViewById(R.id.btn_register);
+        btnCancelar = findViewById(R.id.cancelar);
+
+        // Firebase
+        FirebaseDatabase database =
+                FirebaseDatabase.getInstance("https://gestoreducativo-a2d44-default-rtdb.firebaseio.com");
+
+       dbUsers = database.getReference("users");
+
+        btnRegister.setOnClickListener(v -> registrarUsuario());
+
+        btnCancelar.setOnClickListener(v ->
+                startActivity(new Intent(this, PantallaInicio.class))
+        );
+    }
+
+    // =====================================================
+    // REGISTRO SIN VALIDACIONES (solo Firebase)
+    // =====================================================
+    private void registrarUsuario() {
+
+        String nombre = edxNombre.getText().toString().trim();
+        String apellidos = edxApellidos.getText().toString().trim();
+        String email = edxEmail.getText().toString().trim();
+        String password = edxPass.getText().toString().trim();
+        String fecha = edxBirth.getText().toString().trim();
+
+        String tipoUsuario = rbProfesor.isChecked() ? "profesor" : "alumno";
+
+        // Firebase no permite '.' en las claves
+        String emailKey = email.replace(".", "_");
+
+        dbUsers.child(emailKey).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if (snapshot.exists()) {
+
+                            Snackbar.make( rootView, "El usuario ya existe",Snackbar.LENGTH_SHORT).show();
+
+                        } else {
+
+                            Usuario usuario = new Usuario(nombre, apellidos,email, password ,fecha, tipoUsuario);
+
+                            dbUsers.child(emailKey).setValue(usuario)
+                                    .addOnSuccessListener(unused -> {
+                                        Snackbar.make( rootView, "Usuario registrado correctamente",Snackbar.LENGTH_SHORT).show();
 
 
-        Cancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(cancelar);
-            }
-        });
-//        Registrar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(AccederRegistro);
-//            }
-//        });
+                                        startActivity(new Intent(PantallaRegistro.this,MenuPrincipal.class));
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e ->
+                                            Snackbar.make( rootView, "Error al registrar usuario",Snackbar.LENGTH_SHORT).show()
+                                    );
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Snackbar.make(
+                                rootView,
+                                "Error de conexión con Firebase",
+                                Snackbar.LENGTH_SHORT
+                        ).show();
+                    }
+                });
     }
 }

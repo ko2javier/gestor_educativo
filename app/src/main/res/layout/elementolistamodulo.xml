@@ -2,18 +2,47 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"/>
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
 
+    <!-- ICONO DEL MÓDULO -->
+    <ImageView
+        android:id="@+id/imgModulo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/btn_star_big_on"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Icono módulo"/>
 
-    </LinearLayout>
+    <!-- NOMBRE DEL MÓDULO -->
+    <TextView
+        android:id="@+id/txtNombreModulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre módulo"
+        android:textSize="22sp"
+        android:textColor="@color/black" />
+
+    <!-- BOTÓN EDITAR -->
+    <ImageButton
+        android:id="@+id/btnEditar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Editar módulo"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- BOTÓN BORRAR -->
+    <ImageButton
+        android:id="@+id/btnBorrar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Borrar módulo"/>
+
 </LinearLayout>

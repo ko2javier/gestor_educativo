@@ -1,9 +1,28 @@
 package com.example.gestoreducativo;
 
 public class Modulo {
+    private String idModulo;
     private String nombreCorto;
+
+    public String getIdModulo() {
+        return idModulo;
+    }
+
+    public void setIdModulo(String idModulo) {
+        this.idModulo = idModulo;
+    }
+
     private String nombreCompleto;
     private int numeroHoras;
+
+    public Modulo() { }
+
+    public Modulo(String idModulo, String nombreCompleto, String nombreCorto, int numeroHoras) {
+        this.idModulo = idModulo;
+        this.nombreCompleto = nombreCompleto;
+        this.nombreCorto = nombreCorto;
+        this.numeroHoras = numeroHoras;
+    }
 
     public Modulo(String nombreCorto, String nombreCompleto, int numeroHoras) {
         this.nombreCorto = nombreCorto;

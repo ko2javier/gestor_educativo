@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ListadoModulos">
+
     <TextView
         android:id="@+id/ListaModulos"
         android:layout_width="match_parent"
@@ -15,13 +16,16 @@
         android:text="Listado de Modulos"
         android:textColor="#C72020"
         android:textSize="35sp"
-    />
-    <ListView
-        android:id="@+id/ListModulos"
+        android:padding="8dp"/>
+
+    <!-- 🔥 AQUÍ EL CAMBIO IMPORTANTE -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvModulos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        tools:listitem="@layout/item_modulo"/>
+
     <Button
         android:id="@+id/GestorModulos"
         android:layout_width="wrap_content"
@@ -29,7 +33,5 @@
         android:layout_gravity="center"
         android:background="#C72020"
         android:text="Gestor Modulos"
-        android:layout_marginTop="40dp"
-
-        />
+        android:layout_marginTop="40dp"/>
 </LinearLayout>

@@ -1,43 +1,105 @@
 package com.example.gestoreducativo;
 
+
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class ListadoModulos extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListadoModulos extends AppCompatActivity  implements ModuloAdapter.OnModuloClickListener{
+
+    private RecyclerView rvModulos;
+    private ModuloAdapter moduloAdapter;
+    private List<Modulo> listaModulos;
+
+    private DatabaseReference dbModulos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_listado_modulos);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ListView listadoModulos=findViewById(R.id.ListModulos);
-        String[] nombreModulos=new String[]{"Bases de datos","Acceso a Datos","Sistemas de gestion Empresarial","Bases de datos","Acceso a Datos","Sistemas de gestion Empresarial","Bases de datos","Acceso a Datos","Sistemas de gestion Empresarial"};
-        ArrayAdapter<String>adaptadorModulos=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,nombreModulos);
-        listadoModulos.setAdapter(adaptadorModulos);
-        listadoModulos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        //  RecyclerView
+        rvModulos = findViewById(R.id.rvModulos);
+        rvModulos.setLayoutManager(new LinearLayoutManager(this));
+
+        // Lista + Adapter
+        listaModulos = new ArrayList<>();
+        moduloAdapter = new ModuloAdapter(listaModulos, this);
+        rvModulos.setAdapter(moduloAdapter);
+
+        // Firebase
+        FirebaseDatabase database =
+                FirebaseDatabase.getInstance("https://gestoreducativo-a2d44-default-rtdb.firebaseio.com");
+
+        dbModulos = database.getReference("modulos");
+
+        // Cargar datos
+        cargarModulos();
+    }
+
+    private void cargarModulos() {
+
+        dbModulos.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String elementoSeleccionado=(String) parent.getAdapter().getItem(position);
-                parent.getItemAtPosition(position);
-                Snackbar BarraInformativa=Snackbar.make(ListadoModulos.this,view, "Elemento seleccionado " + elementoSeleccionado, Snackbar.LENGTH_SHORT);
-                BarraInformativa.show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                listaModulos.clear();
+
+                for (DataSnapshot modSnapshot : snapshot.getChildren()) {
+
+                    Modulo modulo = modSnapshot.getValue(Modulo.class);
+
+                    if (modulo != null) {
+                        listaModulos.add(modulo);
+                    }
+                }
+
+                moduloAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Snackbar.make(
+                        rvModulos,
+                        "Error al cargar módulos",
+                        Snackbar.LENGTH_SHORT
+                ).show();
             }
         });
     }
+
+    @Override
+    public void onEditarClick(Modulo modulo) {
+
+        Snackbar.make(rvModulos,"Editar: " + modulo.getNombreCompleto(), Snackbar.LENGTH_SHORT
+        ).show();
+
+        // Más adelante:
+        // Intent a ActivityEditarModulo
+    }
+
+    @Override
+    public void onBorrarClick(Modulo modulo) {
+
+        Snackbar.make( rvModulos, "Borrar: " + modulo.getNombreCompleto(), Snackbar.LENGTH_SHORT
+        ).show();
+
+        // Más adelante:
+        // borrar de Firebase
+    }
+
 }

@@ -49,7 +49,7 @@ public class PantallaInicio extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button id_registro= findViewById(R.id.Registro);
+        Button id_registro= findViewById(R.id.btn_registro);
         Button preferencias=findViewById(R.id.BotonPreferencias);
 
         SharedPreferences preferenciaTamañoTexto=getPreferences(Context.MODE_PRIVATE);
@@ -103,7 +103,7 @@ public class PantallaInicio extends AppCompatActivity {
           PantallaRecibir.putExtra("b",b);
 
         Button Bundle=findViewById(R.id.PruebaBundle);
-        Button registro= findViewById(R.id.Registro);
+        Button btn_registro= findViewById(R.id.btn_registro);
         TextView saludo=findViewById(R.id.saludo);
 
 
@@ -118,15 +118,9 @@ public class PantallaInicio extends AppCompatActivity {
                 startActivity(PantallaRecibir);
             }
         });
-        registro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance("https://gestoreducativo-a2d44-default-rtdb.firebaseio.com");
-                DatabaseReference myRef = database.getReference("message");
-
-                myRef.setValue("Hello, World!");
-                //startActivity(pantallaRegistro);
-            }
+        btn_registro.setOnClickListener(v -> {
+            Intent i= new Intent(this, PantallaRegistro.class);
+            startActivity(i);
         });
         registroBBDD.setOnClickListener(new View.OnClickListener() {
             @Override
