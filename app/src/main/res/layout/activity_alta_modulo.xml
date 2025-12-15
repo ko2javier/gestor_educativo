@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/rootEditarModulo"
+        android:id="@+id/rootAltaModulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -14,48 +14,86 @@
             android:id="@+id/txt_Titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Módulo"
-            android:textSize="26sp"
+            android:text="Alta de Módulo"
             android:gravity="center"
-            android:textColor="#C52424"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="26sp"
+            android:textColor="#CC2E2E"
+            android:layout_marginBottom="40dp" />
 
+        <!-- ID (clave del nodo en Firebase) -->
+        <TextView
+            android:id="@+id/txt_id_modulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alta de Módulo"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
         <EditText
             android:id="@+id/edx_idModulo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:hint="ID Módulo"
-            android:enabled="false" />
-
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:hint="ID Módulo (ej: BD, AD, PSP)"
+            android:inputType="textCapCharacters"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/txt_id_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre Completo"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
         <EditText
             android:id="@+id/edx_nombreCompleto"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
-            android:hint="Nombre completo" />
-
+            />
+        <TextView
+            android:id="@+id/txt_id_nombre_corto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre Corto"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
         <EditText
             android:id="@+id/edx_nombreCorto"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
-            android:hint="Nombre corto" />
-
+             />
+        <TextView
+            android:id="@+id/txt_id_horas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número de Horas"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
         <EditText
             android:id="@+id/edx_horas"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:layout_height="wrap_content"
-            android:hint="Número de horas"
+
             android:inputType="number" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_marginTop="18dp">
+            android:gravity="center"
+            android:layout_marginTop="25dp">
 
             <Button
                 android:id="@+id/btn_cancelar"

@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
+            android:name=".AltaModuloActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditarModuloActivity"
             android:exported="false" />
         <activity
             android:name=".Crear_Modulo"
-            android:exported="false" />
-        <activity
-            android:name=".ElementoListaModulo"
             android:exported="false" />
         <activity
             android:name=".ListadoModulos"

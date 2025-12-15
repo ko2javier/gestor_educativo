@@ -18,13 +18,21 @@
         android:textSize="35sp"
         android:padding="8dp"/>
 
+    <Button
+        android:id="@+id/btnAltaModulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="➕ Añadir módulo"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="12dp" />
+
     <!-- 🔥 AQUÍ EL CAMBIO IMPORTANTE -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvModulos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/item_modulo"/>
+        tools:listitem="@layout/elementolistamodulo"/>
 
     <Button
         android:id="@+id/GestorModulos"
